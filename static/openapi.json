@@ -8,6 +8,26 @@
     "/books": {
       "get": {
         "summary": "List all books",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Author name"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Books publication (asc or desc)"
+          }
+        ],
         "responses": {
           "200": {
             "description": "200 response",
