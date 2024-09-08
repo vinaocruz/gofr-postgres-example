@@ -27,3 +27,11 @@ func CreateBookHandler(ctx *gofr.Context) (interface{}, error) {
 
 	return uc.Book, nil
 }
+
+func ListBooksHandler(ctx *gofr.Context) (interface{}, error) {
+	uc := usecase.NewListBooks(
+		repository.NewPostgresBookRepository(ctx.SQL),
+	)
+
+	return uc.Execute()
+}

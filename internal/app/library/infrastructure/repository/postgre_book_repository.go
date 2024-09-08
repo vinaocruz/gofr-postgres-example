@@ -29,11 +29,11 @@ func (r *PostgresBookRepository) Save(book *entity.Book) error {
 }
 
 func (r *PostgresBookRepository) FindAll() (*sql.Rows, error) {
-	rows, err := r.db.Query("SELECT * FROM books")
+	rows, err := r.db.Query(`SELECT b.id, b.title, b.description, b.published_at, b.created_at, a.id, a.name, a.created_at 
+	FROM books b JOIN authors a ON b.author_id = a.id`)
 	if err != nil {
 		return nil, err
 	}
-	defer rows.Close()
 
 	return rows, nil
 }
