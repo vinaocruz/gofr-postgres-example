@@ -2,7 +2,7 @@
 
 Este projeto apresenta uma breve API para manejar biblioteca com framework Gofr, Postgres e testes com K6.io. O intuito é por em prática essas ferramentas.
 
-A ideia de usar o [gofr.dev](gofr.dev) é conhecê-lo, considerando principalmente seus recursos integrados de log, métricas usando Prometheus e tracing, pilares importantes para sistemas robustos e corporativos.
+A ideia de usar o [gofr.dev](https://gofr.dev) é conhecê-lo, considerando principalmente seus recursos integrados de log, métricas usando Prometheus e tracing, pilares importantes para sistemas robustos e corporativos.
 
 ## Setup
 Execute através de containers, executando o docker-compose:
