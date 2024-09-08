@@ -1,0 +1,121 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Simple Library API",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/books": {
+      "get": {
+        "summary": "List all books",
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "simple": {
+                    "value": {
+                      "data": [
+                        {
+                          "id": 4,
+                          "title": "O menino maluquinho",
+                          "description": "O Menino Maluquinho é uma série de histórias em quadrinhos brasileira criada pelo desenhista e cartunista Ziraldo.",
+                          "published_at": "1980-01-01T00:00:00Z",
+                          "author": {
+                            "id": 2,
+                            "name": "Ziraldo",
+                            "created_at": "2024-09-08T20:15:30.277Z"
+                          },
+                          "created_at": "2024-09-08T20:54:48.356Z"
+                        },
+                        {
+                          "id": 5,
+                          "title": "O menino marrom",
+                          "description": "Conta a história de dois amigos, um negro e um branco, que querem entender juntos as cores. Eles buscam saber o que é branco e o que é preto e se isso os torna diferentes",
+                          "published_at": "1986-01-01T00:00:00Z",
+                          "author": {
+                            "id": 2,
+                            "name": "Ziraldo",
+                            "created_at": "2024-09-08T20:15:30.277Z"
+                          },
+                          "created_at": "2024-09-08T20:56:59.311Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a book",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "simple": {
+                  "value": {
+                    "title": "O menino marrom",
+                    "description": "Conta a história de dois amigos, um negro e um branco, que querem entender juntos as cores. Eles buscam saber o que é branco e o que é preto e se isso os torna diferentes",
+                    "published_at": "1986-01-01",
+                    "name": "Ziraldo"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "201 response",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "simple": {
+                    "value": {
+                      "data": {
+                        "id": 6,
+                        "title": "O menino marrom",
+                        "description": "Conta a história de dois amigos, um negro e um branco, que querem entender juntos as cores. Eles buscam saber o que é branco e o que é preto e se isso os torna diferentes",
+                        "published_at": "1986-01-01",
+                        "author": {
+                          "id": 2,
+                          "name": "Ziraldo",
+                          "created_at": "2024-09-08T20:15:30.277Z"
+                        },
+                        "created_at": "2024-09-08T21:13:50.74Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{id}": {
+      "delete": {
+        "summary": "Delete a book",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "204 response"
+          }
+        }
+      }
+    }
+  }
+}
