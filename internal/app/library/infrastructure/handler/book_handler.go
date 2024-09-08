@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"strconv"
+
 	"github.com/vinaocruz/gofr-postgres-example/internal/app/library/domain/entity"
 	"github.com/vinaocruz/gofr-postgres-example/internal/app/library/domain/usecase"
 	"github.com/vinaocruz/gofr-postgres-example/internal/app/library/infrastructure/repository"
@@ -34,4 +36,15 @@ func ListBooksHandler(ctx *gofr.Context) (interface{}, error) {
 	)
 
 	return uc.Execute()
+}
+
+func DeleteBookHandler(ctx *gofr.Context) (interface{}, error) {
+	id, _ := strconv.Atoi(ctx.Request.PathParam("id"))
+
+	uc := usecase.NewDeleteBook(
+		repository.NewPostgresBookRepository(ctx.SQL),
+		id,
+	)
+
+	return nil, uc.Execute()
 }

@@ -38,6 +38,13 @@ func (r *PostgresBookRepository) FindAll() (*sql.Rows, error) {
 	return rows, nil
 }
 
+func (r *PostgresBookRepository) Find(id int) (*sql.Row, error) {
+	row := r.db.QueryRow(`SELECT b.id, b.title, b.description, b.published_at, b.created_at, a.id, a.name, a.created_at 
+	FROM books b JOIN authors a ON b.author_id = a.id WHERE b.id = $1`, id)
+
+	return row, nil
+}
+
 func (r *PostgresBookRepository) Delete(book *entity.Book) error {
 	stmt, err := r.db.Prepare("DELETE FROM books WHERE id = $1")
 	if err != nil {
