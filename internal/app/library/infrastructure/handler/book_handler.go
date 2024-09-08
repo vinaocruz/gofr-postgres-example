@@ -35,7 +35,17 @@ func ListBooksHandler(ctx *gofr.Context) (interface{}, error) {
 		repository.NewPostgresBookRepository(ctx.SQL),
 	)
 
-	return uc.Execute()
+	filter := make(map[string]string)
+	if name := ctx.Request.Param("name"); name != "" {
+		filter["name"] = name
+	}
+
+	orderBy := make(map[string]string)
+	if order := ctx.Request.Param("order"); order != "" {
+		orderBy["published_at"] = order
+	}
+
+	return uc.Execute(filter, orderBy)
 }
 
 func DeleteBookHandler(ctx *gofr.Context) (interface{}, error) {

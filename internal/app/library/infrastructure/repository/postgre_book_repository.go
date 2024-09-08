@@ -28,9 +28,25 @@ func (r *PostgresBookRepository) Save(book *entity.Book) error {
 	return stmt.QueryRow(book.Title, book.Description, book.Author.ID, book.PublishedAt).Scan(&book.ID, &book.CreatedAt)
 }
 
-func (r *PostgresBookRepository) FindAll() (*sql.Rows, error) {
-	rows, err := r.db.Query(`SELECT b.id, b.title, b.description, b.published_at, b.created_at, a.id, a.name, a.created_at 
-	FROM books b JOIN authors a ON b.author_id = a.id`)
+func (r *PostgresBookRepository) FindAll(filter, order map[string]string) (*sql.Rows, error) {
+	sql := `SELECT b.id, b.title, b.description, b.published_at, b.created_at, a.id, a.name, a.created_at 
+	FROM books b JOIN authors a ON b.author_id = a.id`
+
+	if len(filter) > 0 {
+		sql += " WHERE "
+		for k, v := range filter {
+			sql += k + " = '" + v + "'"
+		}
+	}
+
+	if len(order) > 0 {
+		sql += " ORDER BY "
+		for k, v := range order {
+			sql += k + " " + v
+		}
+	}
+
+	rows, err := r.db.Query(sql)
 	if err != nil {
 		return nil, err
 	}

@@ -15,10 +15,10 @@ func NewListBooks(bookRepo repository.BookRepository) *ListBooks {
 	}
 }
 
-func (uc *ListBooks) Execute() (interface{}, error) {
+func (uc *ListBooks) Execute(filter, order map[string]string) (interface{}, error) {
 	var books []entity.Book
 
-	results, err := uc.BookRepository.FindAll()
+	results, err := uc.BookRepository.FindAll(filter, order)
 	if err != nil {
 		return nil, err
 	}
