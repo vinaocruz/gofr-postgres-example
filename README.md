@@ -41,6 +41,8 @@ make migrate_down
 
 Acesse o endereço [http://localhost:8000/.well-known/swagger](http://localhost:8000/.well-known/swagger) para verificar a documentação dos endpoints disponíveis. Você pode executar a api através da própria página.
 
+![alt text](static/images/swagger.png)
+
 ## Testes
 Para fim didático, foi implementado teste de um caso de uso com mais cenários e sua cobertura. Para executá-lo:
 
@@ -49,6 +51,12 @@ cd internal/app/library/domain/usecase/
 go test
 ```
 
-## K6 - teste de carga
+## K6 - Teste de Carga
 
-TODO
+Um simples teste de carga utilizando [k6.io](https://k6.io) do Grafana Labs, permite ter visibilidade sobre o desempenho da aplicação. Para executá-lo, pode utilizar um container do docker:
+
+```
+docker run --rm --network=gofr-postgres-example_default -i grafana/k6 run - <test/load_test.js
+```
+
+![alt text](static/images/k6-test.png)
